@@ -20,9 +20,9 @@ Next.jsで作成したポケモン図鑑のプロジェクトです。
    http://localhost:3000
    ```
 
-<br><br>
+<br><br><br>
 **以下、デフォルトのREADME.mdを残しておきます。**
-<br><br>
+<br><br><br>
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
 
