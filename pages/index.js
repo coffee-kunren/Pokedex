@@ -598,7 +598,7 @@ function AdvancedSearch({ conditionList, setDetailSearchTrigger }) {
           onClick={() => setOpen(!open)}
           className="px-3 py-2 font-bold text-sm text-gray-100 bg-gradient-to-t from-red-500 to-violet-600 rounded-3xl shadow shadow-gray-600 hover:brightness-80 transition"
         >
-          絞り込み<br />（or検索）
+          絞り込み<br />（and検索）
         </button>
 
         {/* 検索条件(メニュー)を開いている時の背景 */}
