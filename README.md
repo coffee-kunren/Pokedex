@@ -1,5 +1,5 @@
 # Pokémon図鑑 (Next.js)
-Next.jsで作成したポケモン図鑑のサンプルプロジェクトです。
+Next.jsで作成したポケモン図鑑のプロジェクトです。
 
 ## 起動手順
 1. リポジトリをクローン
@@ -20,7 +20,11 @@ Next.jsで作成したポケモン図鑑のサンプルプロジェクトです�
    http://localhost:3000
    ```
 
-以下、デフォルトのREADME.mdを残しておきます。
+
+
+**以下、デフォルトのREADME.mdを残しておきます。**
+
+
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
 
