@@ -1,3 +1,27 @@
+# Pokémon図鑑 (Next.js)
+Next.jsで作成したポケモン図鑑のサンプルプロジェクトです。
+
+## 起動手順
+1. リポジトリをクローン
+   ```bash
+   git clone https://github.com/coffee-kunren/pokedex.git
+   cd pokedex
+   ```
+2. 依存関係をインストール
+   ```bash
+   npm install
+   ```
+3. 開発サーバーを起動
+   ```bash
+   npm run dev
+   ```
+4. ブラウザで以下を開く
+   ```bash
+   http://localhost:3000
+   ```
+
+以下、デフォルトのREADME.mdを残しておきます。
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
 
 ## Getting Started
