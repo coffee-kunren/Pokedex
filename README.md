@@ -6,10 +6,12 @@ Next.jsで作成したポケモン図鑑のプロジェクトです。
 **起動前に以下をインストールしてください**
 
 - Node.js（動作確認時のバージョン: v22.16.0）  
-  [Node.js公式サイト](https://nodejs.org/) からダウンロードできます
+  <a href="https://nodejs.org/" target="_blank" rel="noopener noreferrer">Node.js公式サイト</a>
+  からダウンロードできます
 
 - Git（動作確認時のバージョン: 2.53.0）  
-  [Git公式サイト](https://git-scm.com/) からダウンロードできます
+  <a href="https://git-scm.com/" target="_blank" rel="noopener noreferrer">Git公式サイト</a>
+  からダウンロードできます
 
 インストール確認コマンド：
 ```bash
