@@ -31,8 +31,11 @@ node -v
    ```bash
    npm run dev
    ```
-4. コンソールに「> next dev」が表示されている状態で、
-  [http://localhost:3000](http://localhost:3000)にアクセス
+4. コンソールに
+  ```bash
+  > next dev
+  ```
+  が表示されている状態で、  [http://localhost:3000](http://localhost:3000)を開く
    
 
 <br><br><br>
