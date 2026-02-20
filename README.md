@@ -31,10 +31,9 @@ node -v
    ```bash
    npm run dev
    ```
-4. ブラウザで以下を開く
-   ```bash
-   http://localhost:3000
-   ```
+4. コンソールに「> next dev」が表示されている状態で、
+  [http://localhost:3000](http://localhost:3000)にアクセス
+   
 
 <br><br><br>
 **以下、デフォルトのREADME.mdを残しておきます。**
