@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-//import Papa from "papaparse";//csvから読込む時に使う
+//import Papa from "papaparse";//csvから読込む時に使う用
 import { usePokemonData, useAbilityData } from "@/contexts/DataContext";
 import { Range, getTrackBackground } from "react-range";
 
@@ -752,6 +752,8 @@ function AdvancedSearch({ conditionList, setDetailSearchTrigger }) {
 
 //★並べ替えボタン
 function SortBtn({ sortTypes, currentSort, setDetailSearchTrigger }) {
+  const [selectedKey, setSelectedKey] = useState(currentSort.key);
+  const [selectedOrder, setSelectedOrder] = useState(currentSort.key);
   const [open, setOpen] = useState(false);
   const router = useRouter();//リダイレクト用
 
@@ -761,8 +763,8 @@ function SortBtn({ sortTypes, currentSort, setDetailSearchTrigger }) {
 
     const sortKey = e.target.querySelector('#sortKey').value;
     const sortOrder = e.target.querySelector('#sortOrder').value;
-    sessionStorage.setItem("sortKey", sortKey);
-    sessionStorage.setItem("sortOrder", sortOrder);
+    sessionStorage.setItem("sortKey", selectedKey);
+    sessionStorage.setItem("sortOrder", selectedOrder);
     setDetailSearchTrigger(prev => prev + 1);//再レンダリング用
     setOpen(!open);//ボタンを閉じる
     router.push('/');//自身にリダイレクト
@@ -806,6 +808,8 @@ function SortBtn({ sortTypes, currentSort, setDetailSearchTrigger }) {
                   </div>
                   <select
                     id="sortKey"
+                    value={selectedKey}
+                    onChange={(e) => setSelectedKey(e.target.value)}
                     className="w-full p-2 text-sm border rounded hover:bg-gray-100"
                   >
                     {sortTypes.map((t, index) => (
@@ -821,6 +825,8 @@ function SortBtn({ sortTypes, currentSort, setDetailSearchTrigger }) {
                   </div>
                   <select
                     id="sortOrder"
+                    value={selectedOrder}
+                    onChange={(e) => setSelectedOrder(e.target.value)}
                     className="w-full p-2 text-sm border rounded hover:bg-gray-100"
                   >
                     <option className="text-red-500 bg-white" value="0">昇順</option>
