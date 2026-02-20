@@ -215,52 +215,60 @@ function Gallery({ searchTerm, filterMode, viewMode, conditionList, currentSort,
       initialData = initialData.filter(p => p.id >= 1 && p.id <= 1025);
     }
 
-    /* 詳細検索による絞り込み */
-    if (conditionList) {
-      conditionList.forEach(cond => {
-        if (!cond || cond.length === 0) return;
-        /* 番号の範囲 */
-        if (cond.range) {
-          initialData = initialData.filter(p => p.origin_id >= cond.range[0] && p.origin_id <= cond.range[1]);
-        }
+    /* 詳細検索による絞り込み（OR検索） */
+    if (conditionList && conditionList.length > 0) {
+      initialData = initialData.filter(p => {
+        return conditionList.some(cond => {
+          /* 番号の範囲 */
+          const rangeMatch =
+            !cond.range ||
+            (p.origin_id >= cond.range[0] && p.origin_id <= cond.range[1]);
 
-        /* タイプ */
-        if (cond.type && cond.type.length > 0) {
-          const typeList = [
-            "ノーマル", "ほのお", "みず", "くさ", "でんき", "こおり",
-            "かくとう", "どく", "じめん", "ひこう", "エスパー", "むし",
-            "いわ", "ゴースト", "ドラゴン", "あく", "はがね", "フェアリー"
-          ];
-          initialData = initialData.filter(p => {
+          /* タイプ */
+          let typeMatch = true;
+          if (cond.type && cond.type.length > 0) {
+            const typeList = [
+              "ノーマル", "ほのお", "みず", "くさ", "でんき", "こおり",
+              "かくとう", "どく", "じめん", "ひこう", "エスパー", "むし",
+              "いわ", "ゴースト", "ドラゴン", "あく", "はがね", "フェアリー"
+            ];
             const types = [p["タイプ1"], p["タイプ2"]].filter(Boolean);
-            return cond.type.every(i => types.includes(typeList[i]));
-          });
-        }
+            typeMatch = cond.type.every(i =>
+              types.includes(typeList[i])
+            );
+          }
 
-        /* 特性 */
-        if (cond.ability && cond.ability !== "") {
-          initialData = initialData.filter(p => {
+          /* 特性 */
+          let abilityMatch = true;
+          if (cond.ability && cond.ability !== "") {
             const abilities = [p["特性1"], p["特性2"], p["夢特性"]].filter(Boolean);
-            return abilities.includes(cond.ability);
-          });
-        }
+            abilityMatch = abilities.includes(cond.ability);
+          }
 
-        /* ワード */
-        if (cond.word && cond.word.trim() !== "") {
-          const num = parseInt(cond.word) || 0;
-          if (num !== 0) {
-            initialData = initialData.filter(p => Number(p.origin_id) === num);
-          } else {
-            const toLower = cond.word.toLowerCase();
-            initialData = initialData.filter(p => {
+          /* ワード */
+          let wordMatch = true;
+          if (cond.word && cond.word.trim() !== "") {
+            const num = parseInt(cond.word) || 0;
+
+            if (num !== 0) {
+              wordMatch = Number(p.origin_id) === num;
+            } else {
+              const toLower = cond.word.toLowerCase();
               const name = p.name?.toLowerCase() || "";
               const hira = p.hiragana?.toLowerCase() || "";
               const roma = p.romaji?.toLowerCase() || "";
               const formName = p.form_name?.toLowerCase() || "";
-              return name.includes(toLower) || hira.includes(toLower) || roma.includes(toLower) || formName.includes(toLower);
-            });
+
+              wordMatch =
+                name.includes(toLower) ||
+                hira.includes(toLower) ||
+                roma.includes(toLower) ||
+                formName.includes(toLower);
+            }
           }
-        }
+          // 1つの条件内はAND
+          return rangeMatch && typeMatch && abilityMatch && wordMatch;
+        });
       });
     }
 
@@ -600,7 +608,7 @@ function AdvancedSearch({ conditionList, setDetailSearchTrigger }) {
           onClick={() => setOpen(!open)}
           className="px-3 py-2 font-bold text-sm text-gray-100 bg-gradient-to-t from-red-500 to-violet-600 rounded-3xl shadow shadow-gray-600 hover:brightness-80 transition"
         >
-          絞り込み<br />（and検索）
+          絞り込み<br />（OR検索）
         </button>
 
         {/* 検索条件(メニュー)を開いている時の背景 */}
@@ -809,8 +817,8 @@ function SortBtn({ sortTypes, currentSort, setDetailSearchTrigger }) {
                   <select
                     id="sortKey"
                     value={selectedKey}
-                    onChange={(e) => setSelectedKey(e.target.value)}
                     className="w-full p-2 text-sm border rounded hover:bg-gray-100"
+                    onChange={(e) => setSelectedKey(e.target.value)}
                   >
                     {sortTypes.map((t, index) => (
                       <option className="bg-white" value={index}>
@@ -826,8 +834,8 @@ function SortBtn({ sortTypes, currentSort, setDetailSearchTrigger }) {
                   <select
                     id="sortOrder"
                     value={selectedOrder}
-                    onChange={(e) => setSelectedOrder(e.target.value)}
                     className="w-full p-2 text-sm border rounded hover:bg-gray-100"
+                    onChange={(e) => setSelectedOrder(e.target.value)}
                   >
                     <option className="text-red-500 bg-white" value="0">昇順</option>
                     <option className="text-blue-700 bg-white" value="1">降順</option>
@@ -838,6 +846,10 @@ function SortBtn({ sortTypes, currentSort, setDetailSearchTrigger }) {
                   <button
                     type="reset"
                     className="px-2 py-1 border rounded hover:bg-gray-100"
+                    onClick={() => {
+                      setSelectedKey("0");
+                      setSelectedOrder("0");
+                    }}
                   >
                     リセット
                   </button>
