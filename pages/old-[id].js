@@ -1,3 +1,4 @@
+/* バックアップ用 */
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { usePokemonData, useAbilityData } from "@/contexts/DataContext";

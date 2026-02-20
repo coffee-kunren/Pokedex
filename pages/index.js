@@ -49,23 +49,25 @@ export default function Home() {
     <div className="min-h-screen flex justify-center px-4">
       <main className="flex flex-col gap-8 w-full max-w-6xl">
         <header className="fixed w-full h-24 z-50 bg-white flex justify-between items-center">
-          <div className="relative inline-block">
-            <img
-              src="images/img/title_frame.svg"
-              className="w-70 h-auto object-contain"
-            />
-            <h1 className="absolute text-3xl font-bold left-13 top-2.5 bg-white">ポケモン図鑑</h1>
-          </div>
-          <div className="flex gap-2 mr-4">
-            <AdvancedSearch
-              conditionList={conditionList}
-              setDetailSearchTrigger={setDetailSearchTrigger}
-            />
-            <SortBtn
-              sortTypes={sortTypes}
-              currentSort={currentSort}
-              setDetailSearchTrigger={setDetailSearchTrigger}
-            />
+          <div className="flex justify-between items-center w-full max-w-6xl px-4">
+            <div className="relative inline-block">
+              <img
+                src="images/img/title_frame.svg"
+                className="w-70 h-auto object-contain"
+              />
+              <h1 className="absolute text-3xl font-bold left-13 top-2.5 bg-white">ポケモン図鑑</h1>
+            </div>
+            <div className="flex gap-2 mr-4">
+              <AdvancedSearch
+                conditionList={conditionList}
+                setDetailSearchTrigger={setDetailSearchTrigger}
+              />
+              <SortBtn
+                sortTypes={sortTypes}
+                currentSort={currentSort}
+                setDetailSearchTrigger={setDetailSearchTrigger}
+              />
+            </div>
           </div>
         </header>
         <div className="self-end mt-24">
